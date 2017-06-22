@@ -1,8 +1,8 @@
 #include "../include/Fqd.hpp"
 
 extern "C" {
-#include "../../Robotics_Cape_Installer/libraries/rc_usefulincludes.h"
-#include "../../Robotics_Cape_Installer/libraries/roboticscape.h"
+#include <rc_usefulincludes.h>
+#include <roboticscape.h>
 };
 
 using namespace bbblue;
