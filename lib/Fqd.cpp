@@ -1,4 +1,5 @@
 #include "../include/Fqd.hpp"
+#include <iostream>
 
 extern "C" {
 #include <rc_usefulincludes.h>
@@ -10,22 +11,17 @@ using namespace eeros::hal;
 
 Fqd::Fqd(std::string id,  void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, double scale,
 		double offset, double rangeMin, double rangeMax, std::string unit, bool getDelta) : 
-	ScalableInput<double>(id, libHandle, scale, offset, rangeMin, rangeMax, unit), channel(channel), prevPos(0), getDelta(getDelta) {
+	ScalableInput<double>(id, libHandle, scale, offset, rangeMin, rangeMax, unit), channel(channel), prevPos(0) {
+	std::cout << "scale = " << scale << "   offset = " << offset << std::endl;
 	reset();
 }
 
 double Fqd::get() {
-	uint32_t data = rc_get_encoder_pos(channel);
-	int16_t newPos = static_cast<uint16_t>(data);
-	int16_t deltaPos = newPos - prevPos;
-	prevPos = newPos;
-	double delta = deltaPos / scale + offset;
-	pos += delta;
-	
-	if (getDelta)
-		return delta;
-	else
-		return pos;
+	int32_t actPos = rc_get_encoder_pos(channel);
+	int32_t deltaPos = actPos - prevPos;
+	prevPos = actPos;
+	pos += deltaPos / scale + offset;
+	return pos;
 }
 
 void Fqd::reset() {

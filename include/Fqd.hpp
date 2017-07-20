@@ -17,11 +17,9 @@ namespace bbblue {
 		void reset();
 		
 	private:
-//		flink_subdev* subdeviceHandle;
-		uint32_t channel;
-		uint16_t prevPos;
+		int32_t channel;
+		int32_t prevPos;
 		double pos;
-		bool getDelta;
 	};
 };
 

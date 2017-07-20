@@ -20,13 +20,10 @@ double AnalogOut::get() { return 0; }
 void AnalogOut::setValue(uint32_t value) { }
 
 void AnalogOut::set(double voltage) {
-// 	std::cout << " offset " << offset << std::endl;
-// 	std::cout << " scale " << scale << std::endl;
 	double value = (voltage - offset) / scale;
 	if( value > maxOut ) value = maxOut;
 	if( value < minOut ) value = minOut;
-// 	std::cout << " set to " << value << std::endl;
-	rc_set_motor(channel, (float)voltage);	
+	rc_set_motor(channel, (float)value);	
 }
 
 extern "C"{
