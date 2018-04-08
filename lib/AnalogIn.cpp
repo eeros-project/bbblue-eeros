@@ -21,10 +21,10 @@ double AnalogIn::get() {
 	*/
 	double readVaule{};
 	switch (channel) {
-	  case 0:
+	  case 1:
 	    readVaule = rc_battery_voltage();
 	    break;
-	  case 1:
+	  case 2:
 	    readVaule = rc_dc_jack_voltage();
 	    break;
 	  default:
