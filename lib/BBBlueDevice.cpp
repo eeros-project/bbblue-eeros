@@ -2,6 +2,8 @@
 #include <eeros/core/Fault.hpp>
 #include <iostream>
 
+#include <memory>
+
 extern "C" {
 #include <rc_usefulincludes.h>
 #include <roboticscape.h>
@@ -21,6 +23,7 @@ BBBlueDevice::BBBlueDevice() {
 
 BBBlueDevice::~BBBlueDevice() {
 	rc_cleanup();
+	std::cout << "robotics cape cleaned up." << std::endl;
 }
 
-BBBlueDevice* BBBlueDevice::instance = new BBBlueDevice();
+std::unique_ptr<BBBlueDevice> instance{new BBBlueDevice()};
