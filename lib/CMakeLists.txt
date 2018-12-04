@@ -8,4 +8,6 @@ add_library(bbblueeeros SHARED ${BBBLUEEEROS_SRCS})
 target_link_libraries(bbblueeeros roboticscape eeros)
 # target_link_libraries(bbblueeeros_static roboticscape eeros)
 
-INSTALL(FILES ${CMAKE_CURRENT_BINARY_DIR}/libbbblueeeros.so DESTINATION lib)
+set_target_properties(bbblueeeros PROPERTIES VERSION ${VERSION})
+
+INSTALL(TARGETS bbblueeeros LIBRARY DESTINATION lib)

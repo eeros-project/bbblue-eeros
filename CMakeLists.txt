@@ -1,13 +1,17 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 3.5.1)
 project(bbblueeeros)
 
-## Compiler flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_CXX_STANDARD 14)
+
+## fetch the version information from git ; Source: https://github.com/Munkei/munkei-cmake
+## doc: https://github.com/Munkei/munkei-cmake/blob/master/doc/MunkeiVersionFromGit.md
+include(cmake/MunkeiVersionFromGit.cmake)
+version_from_git()
 
 include_directories(${ADDITIONAL_INCLUDE_DIRS})
 link_directories(${ADDITIONAL_LINK_DIRS})
 
-find_package(EEROS REQUIRED)
+find_package(EEROS ${REQUIRED_EEROS_VERSION} REQUIRED)
 include_directories(${EEROS_INCLUDE_DIR})
 link_directories(${EEROS_LIB_DIR})
 
