@@ -6,9 +6,6 @@ namespace bbblue {
 	public:
 		BBBlueDevice();
 		virtual ~BBBlueDevice();
-		
-	private:
-		static BBBlueDevice* instance;
 	};
 };
 
