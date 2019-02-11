@@ -1,6 +1,7 @@
 # The MIT License (MIT)
 #
 # Copyright (c) 2016-2017 Theo Willows
+#           (c) 2019 A. Kunz - NTB Interstaatliche Hochschule für Technik Buchs Switzerland
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -19,6 +20,11 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
+
+# This file was copied from: https://github.com/Munkei/munkei-cmake
+# Documentation at: https://github.com/Munkei/munkei-cmake/blob/master/doc/MunkeiVersionFromGit.md
+
 
 cmake_minimum_required( VERSION 3.0.0 )
 
@@ -87,6 +93,7 @@ function( version_from_git )
     set( version_major "${CMAKE_MATCH_1}" )
     set( version_minor "${CMAKE_MATCH_2}" )
     set( version_patch "${CMAKE_MATCH_3}" )
+    set( version_tweak  0                 ) # default if current commit is tagged
     set( identifiers   "${CMAKE_MATCH_4}" )
     set( metadata      "${CMAKE_MATCH_5}" )
   else()
@@ -102,6 +109,9 @@ function( version_from_git )
   if( NOT git_at_a_tag )
     # Extract the Git hash (if one exists)
     string( REGEX MATCH "g[0-9a-f]+$" git_hash "${git_describe}" )
+    # Extract the number of commits since the last tagged commit and use it as tweak number
+    string( REGEX MATCH "-[1-9][0-9]*-g" version_tweak_raw "${git_describe}" )
+    string( REGEX MATCH "[1-9][0-9]*" version_tweak "${version_tweak_raw}" )
   endif()
 
   # Construct the version variables
@@ -163,5 +173,6 @@ function( version_from_git )
   set( VERSION_MAJOR ${version_major} PARENT_SCOPE )
   set( VERSION_MINOR ${version_minor} PARENT_SCOPE )
   set( VERSION_PATCH ${version_patch} PARENT_SCOPE )
+  set( VERSION_TWEAK ${version_tweak} PARENT_SCOPE )
 
 endfunction( version_from_git )

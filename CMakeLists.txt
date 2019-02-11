@@ -3,15 +3,31 @@ project(bbblueeeros)
 
 set(CMAKE_CXX_STANDARD 14)
 
-## fetch the version information from git ; Source: https://github.com/Munkei/munkei-cmake
-## doc: https://github.com/Munkei/munkei-cmake/blob/master/doc/MunkeiVersionFromGit.md
+set(RECOMMENDED_EEROS_VERSION 1.0.0.0)
+
 include(cmake/MunkeiVersionFromGit.cmake)
-version_from_git()
+version_from_git() # Fetch the library version information from git
 
 include_directories(${ADDITIONAL_INCLUDE_DIRS})
 link_directories(${ADDITIONAL_LINK_DIRS})
 
-find_package(EEROS ${REQUIRED_EEROS_VERSION} REQUIRED)
+
+if(NOT DEFINED REQUIRED_EEROS_VERSION OR
+   NOT REQUIRED_EEROS_VERSION MATCHES
+       "^(0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)[.](0|[1-9][0-9]*)$")
+
+  set(REQUIRED_EEROS_VERSION ${RECOMMENDED_EEROS_VERSION})
+  message("Using recommended EEROS version, which is: v${REQUIRED_EEROS_VERSION}")
+
+else()
+  if(NOT ${REQUIRED_EEROS_VERSION} EQUAL ${RECOMMENDED_EEROS_VERSION})
+     message("You are not using the recommended EEROS version, "
+             "which would be: v${RECOMMENDED_EEROS_VERSION}")
+  endif(NOT ${REQUIRED_EEROS_VERSION} EQUAL ${RECOMMENDED_EEROS_VERSION})
+endif()
+
+
+find_package(EEROS ${REQUIRED_EEROS_VERSION} EXACT REQUIRED)
 include_directories(${EEROS_INCLUDE_DIR})
 link_directories(${EEROS_LIB_DIR})
 
