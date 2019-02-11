@@ -1,6 +1,6 @@
 include_directories(../include/)
 
-set(BBBLUEEEROS_SRCS BBBlueDevice.cpp DigOut.cpp DigIn.cpp AnalogOut.cpp Fqd.cpp)
+set(BBBLUEEEROS_SRCS BBBlueDevice.cpp DigOut.cpp DigIn.cpp AnalogOut.cpp AnalogIn.cpp Fqd.cpp)
 
 add_library(bbblueeeros SHARED ${BBBLUEEEROS_SRCS})
 # add_library(bbblueeeros_static ${BBBLUEEEROS_SRCS})
