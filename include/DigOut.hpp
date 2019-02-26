@@ -17,7 +17,7 @@ namespace bbblue {
 		virtual bool get();
 		virtual void set(bool value);
 	private:
-		rc_led_t channel;
+		uint32_t channel;
 		bool inverted;
 	};
 };
