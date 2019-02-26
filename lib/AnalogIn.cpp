@@ -15,21 +15,21 @@ AnalogIn::AnalogIn(std::string id,  void* libHandle, std::string device, uint32_
 }
 
 double AnalogIn::get() {
-	/* Decide from which function should be read depending on channel number.
-	   ADC channel 10&11 are battery and voltage jack with voltage deviders.
-	   so we call their separate functions which compensate the deviders. 
-	*/
 	double readVaule{};
-	switch (channel) {
-	  case 10:
-	    readVaule = rc_battery_voltage();
-	    break;
-	  case 11:
-	    readVaule = rc_dc_jack_voltage();
-	    break;
-	  default:
-	    readVaule = rc_adc_volt(channel);
+
+	if(channel < 10) {
+		readVaule = rc_adc_raw(channel);
+
+	}else if(channel < 20) {
+		readVaule = rc_adc_volt(channel-10);
+
+	}else if(channel == 25) {
+		readVaule = rc_dc_jack_voltage();
+
+	}else if(channel == 26) {
+		readVaule = rc_battery_voltage();
 	}
+
 	double value = (readVaule - offset) / scale;
 	if( value > maxIn ) value = maxIn;
 	if( value < minIn ) value = minIn;
