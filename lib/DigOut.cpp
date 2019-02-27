@@ -11,7 +11,6 @@ DigOut::DigOut(std::string id, void *libHandle, std::string device, uint32_t sub
 		if(channel > 1){
 			rc_gpio_export(channel);
 			rc_gpio_set_dir(channel, OUTPUT_PIN);
-		        this->channel = channel;
 		}
 }
 
