@@ -5,7 +5,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## Unreleased
-(v1.1.0 targeted for 2019-06-30) ([Github compare v1.0.0...master](https://github.com/eeros-project/bbblue-eeros/compare/v1.0.0...master))
+(v1.1.0 targeted for 2019-08-31) ([Github compare v1.0.0...master](https://github.com/eeros-project/bbblue-eeros/compare/v1.0.0...master))
+
+### Added Features
+* **Fqd:** Add set position function to Fqd. ([pull request #6](https://github.com/eeros-project/bbblue-eeros/pull/6))
 
 
 ## v1.0.0
