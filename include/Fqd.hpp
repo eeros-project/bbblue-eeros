@@ -15,6 +15,7 @@ namespace bbblue {
 		    std::string unit = "", bool getDelta = false);
 		virtual double get();
 		void reset();
+		void setPos(double position);
 		
 	private:
 		int32_t channel;
@@ -28,6 +29,8 @@ extern "C"{
 						     uint32_t channel, double scale, double offset, 
 						     double rangeMin, double rangeMax, std::string unit);
 	void resetFqd(bbblue::Fqd *obj);
+
+	void setFqdPos(bbblue::Fqd *obj, double position);
 }
 
 #endif /* BBBLUE_EEROS_FQD_HPP_ */
