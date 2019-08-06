@@ -4,8 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## Unreleased
-(v1.1.0 targeted for 2019-08-31) ([Github compare v1.0.0...master](https://github.com/eeros-project/bbblue-eeros/compare/v1.0.0...master))
+## v1.1.0
+(2019-08-06) ([Github compare v1.0.0...v1.1.0](https://github.com/eeros-project/bbblue-eeros/compare/v1.0.0...v1.1.0))
 
 ### Added Features
 * **Fqd:** Add set position function to Fqd. ([pull request #6](https://github.com/eeros-project/bbblue-eeros/pull/6))
