@@ -14,11 +14,11 @@ The bbblue-eeros wrapper library enables the usage of the BBB hardware with the 
 
 ## Getting Started
 
-The easiest way to get started using EEROS on the BeagleBone® Blue is using the [BeagleBoneBlue](https://github.com/ntb-ch/BeagleBoneBlue) project from NTB.
+The easiest way to get started using EEROS on the BeagleBone® Blue is described in [Installation and Setup](https://wiki.eeros.org/getting_started/install_and_setup_development_environment) and more specifically in [Use on a Beaglebone Blue Board](https://wiki.eeros.org/getting_started/install_and_setup_development_environment/use_on_bbb).
 
 The EEROS framework uses various [hardware libraries](http://wiki.eeros.org/eeros_architecture/hal/hardware_libraries) to access the underlying hardware. For the BeagleBone® Blue, the [Robot Control Library](https://github.com/StrawsonDesign/librobotcontrol) is used through this hardware wrapper library. 
 
-The EEROS [Hardware Abstraction Layer](http://wiki.eeros.org/eeros_architecture/hal/start) needs a [configuration file](http://wiki.eeros.org/eeros_architecture/hal/configuration_file) which describes the hardware. A hardware configuration file describing all features in this hardware wrapper library can be found in the [BeagleBoneBlue](https://github.com/ntb-ch/BeagleBoneBlue) project from NTB. It is called [HwConfigBBBlue.json](https://github.com/ntb-ch/BeagleBoneBlue/blob/master/myApp/HwConfigBBBlue.json).
+The EEROS [Hardware Abstraction Layer](http://wiki.eeros.org/eeros_architecture/hal/start) needs a [configuration file](http://wiki.eeros.org/eeros_architecture/hal/configuration_file) which describes the hardware. A hardware configuration file describing all features in this hardware wrapper library can be found in the root of this repository. It is called * *HwConfigBBBlue.json* *.
 
 
 ## Projects using EEROS on the BeagleBone® Blue
