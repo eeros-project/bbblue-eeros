@@ -4,8 +4,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## Unreleased
-(v1.2.0 targeted for 2020-01-31) ([Github compare v1.1.0...master](https://github.com/eeros-project/bbblue-eeros/compare/v1.1.0...master))
+## v1.2.0
+(2019-10-22) ([GitHub compare v1.1.0...v1.2.0](https://github.com/eeros-project/bbblue-eeros/compare/v1.1.0...v1.2.0))
 
 ### Added Features
 * **AnalogOut:** Allow reading back of analog output value. ([2d0268a](https://github.com/eeros-project/bbblue-eeros/commit/2d0268a04e3c4df49c087f609da2e8aade722a60))
