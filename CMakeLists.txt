@@ -5,7 +5,7 @@ project(bbblue-eeros)
 set(CMAKE_CXX_STANDARD 14)
 
 
-set(RECOMMENDED_EEROS_VERSION 1.1.0.0)
+set(RECOMMENDED_EEROS_VERSION 1.2.0.0)
 
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug|DEBUG")
@@ -14,7 +14,6 @@ endif()
 
 
 include(cmake/versionCheckHelpers.cmake)
-
 
 setLibraryVersion()
 
@@ -32,14 +31,10 @@ include_directories(${EEROS_INCLUDE_DIR})
 link_directories(${EEROS_LIB_DIR})
 
 
-find_path(BEAGLE_BOARD_BLUE_INCLUDE_DIR NAMES rc_usefulincludes.h roboticscape.h)
-if(BEAGLE_BOARD_BLUE_INCLUDE_DIR)
-  include_directories(${BEAGLE_BOARD_BLUE_INCLUDE_DIR})
-endif()
-find_library(BEAGLE_BOARD_BLUE_LIBRARY roboticscape)
+find_library(BEAGLE_BOARD_BLUE_LIBRARY robotcontrol)
 if(BEAGLE_BOARD_BLUE_LIBRARY)
-  message(STATUS "-> libroboticscape available")
-  set(BEAGLE_BOARD_BLUE_LIBRARY_DIR ${BEAGLE_BOARD_BLUE_LIBRARY_DIR} roboticscape)
+  message(STATUS "-> librobotcontrol available")
+  set(BEAGLE_BOARD_BLUE_LIBRARY_DIR ${BEAGLE_BOARD_BLUE_LIBRARY_DIR} robotcontrol)
 endif()
 
 

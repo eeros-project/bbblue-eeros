@@ -1,29 +1,23 @@
 #include "../include/BBBlueDevice.hpp"
 #include <eeros/core/Fault.hpp>
-#include <iostream>
-
-#include <memory>
 
 extern "C" {
-#include <rc_usefulincludes.h>
-#include <roboticscape.h>
+#include <robotcontrol.h>
 };
 
 using namespace bbblue;
 
-BBBlueDevice::BBBlueDevice() {
-	if(rc_initialize()){
-		throw eeros::Fault("Can't initialize robotics cape");
-	}
-	std::cout << "robotics cape initialized" << std::endl;
-	
-	rc_disable_signal_handler();	// we use our own signal handler
-	std::cout << "signal handling transfered to application" << std::endl;
+BBBlueDevice::BBBlueDevice() : log(Logger::getLogger()) {
+  rc_model_t model = rc_model();
+  if (model != MODEL_BB_BLUE) throw eeros::Fault("wrong platform for libbbblueeeros wrapper library");
+  log.info() << "robot control initialized on BeagleBone blue"; 
+  
+  rc_disable_signal_handler();	// we use our own signal handler
+  log.info() << "robot control: signal handling transfered to application";
 }
 
 BBBlueDevice::~BBBlueDevice() {
-	rc_cleanup();
-	std::cout << "robotics cape cleaned up." << std::endl;
+  log.info() << "robot control done";
 }
 
 std::unique_ptr<BBBlueDevice> instance{new BBBlueDevice()};

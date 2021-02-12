@@ -3,27 +3,29 @@
 
 #include <string>
 #include <eeros/hal/Output.hpp>
-#include "BBBlueDevice.hpp"
 
 extern "C" {
-#include <rc_usefulincludes.h>
-#include <roboticscape.h>
+#include <robotcontrol.h>
 };
 
 namespace bbblue {
-	class DigOut : public eeros::hal::Output<bool> {
-	public:
-		DigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted = false);
-		virtual bool get();
-		virtual void set(bool value);
-	private:
-		uint32_t channel;
-		bool inverted;
-	};
+
+class DigOut : public eeros::hal::Output<bool> {
+ public:
+  DigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted = false);
+  virtual ~DigOut();
+  virtual bool get();
+  virtual void set(bool value);
+ 
+ private:
+  uint32_t channel;
+  bool inverted;
 };
 
+}
+
 extern "C"{
-	eeros::hal::Output<bool> *createDigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted);
+  eeros::hal::Output<bool> *createDigOut(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted);
 }
 
 #endif /* BBBLUE_EEROS_DIGOUT_HPP_ */

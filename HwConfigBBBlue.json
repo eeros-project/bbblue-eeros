@@ -10,24 +10,24 @@
 			"channel1": {
 				"signalId": "onBoardLEDred"
 			},
-			"channel57": {
-				"signalId": "gp0_pin3"
-			},
-			"channel49": {
-				"signalId": "gp0_pin4"
-			},
-			"channel116": {
-				"signalId": "gp0_pin5"
-			},
-			"channel113": {
-				"signalId": "gp0_pin6"
-			},
-			"channel98": {
-				"signalId": "gp1_pin3"
-			},
-			"channel97": {
-				"signalId": "gp1_pin4"
-			}
+      "channel117": {
+        "signalId": "gp1_pin17"
+      },
+      "channel125": {
+        "signalId": "gp1_pin25"
+      },
+      "channel31": {
+        "signalId": "gp3_pin1"
+      },
+      "channel32": {
+        "signalId": "gp3_pin2"
+      },
+      "channel317": {
+        "signalId": "gp3_pin17"
+      },
+      "channel320": {
+        "signalId": "gp3_pin20"
+      }
 		},
 		"subdevice1": {
 			"type": "DigIn",
@@ -37,23 +37,23 @@
 			"channel1": {
 				"signalId": "onBoardButtonMode"
 			},
-			"channel57": {
-				"signalId": "gp0_pin3"
+			"channel117": {
+				"signalId": "gp1_pin17"
 			},
-			"channel49": {
-				"signalId": "gp0_pin4"
+			"channel125": {
+				"signalId": "gp1_pin25"
 			},
-			"channel116": {
-				"signalId": "gp0_pin5"
+			"channel31": {
+				"signalId": "gp3_pin1"
 			},
-			"channel113": {
-				"signalId": "gp0_pin6"
+			"channel32": {
+				"signalId": "gp3_pin2"
 			},
-			"channel98": {
-				"signalId": "gp1_pin3"
+			"channel317": {
+				"signalId": "gp3_pin17"
 			},
-			"channel97": {
-				"signalId": "gp1_pin4"
+			"channel320": {
+				"signalId": "gp3_pin20"
 			}
 		},
 		"subdevice2": {
