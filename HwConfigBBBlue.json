@@ -10,6 +10,33 @@
 			"channel1": {
 				"signalId": "onBoardLEDred"
 			},
+      "channel2": {
+        "signalId": "onBoardLEDuser0"
+      },
+      "channel3": {
+        "signalId": "onBoardLEDuser1"
+      },
+      "channel4": {
+        "signalId": "onBoardLEDuser2"
+      },
+      "channel5": {
+        "signalId": "onBoardLEDuser3"
+      },
+      "channel6": {
+        "signalId": "onBoardLEDbat25"
+      },
+      "channel7": {
+        "signalId": "onBoardLEDbat50"
+      },
+      "channel8": {
+        "signalId": "onBoardLEDbat75"
+      },
+      "channel9": {
+        "signalId": "onBoardLEDbat100"
+      },
+      "channel10": {
+        "signalId": "onBoardLEDwifi"
+      },
       "channel117": {
         "signalId": "gp1_pin17"
       },
@@ -36,24 +63,6 @@
 			},
 			"channel1": {
 				"signalId": "onBoardButtonMode"
-			},
-			"channel117": {
-				"signalId": "gp1_pin17"
-			},
-			"channel125": {
-				"signalId": "gp1_pin25"
-			},
-			"channel31": {
-				"signalId": "gp3_pin1"
-			},
-			"channel32": {
-				"signalId": "gp3_pin2"
-			},
-			"channel317": {
-				"signalId": "gp3_pin17"
-			},
-			"channel320": {
-				"signalId": "gp3_pin20"
 			}
 		},
 		"subdevice2": {
@@ -113,7 +122,7 @@
 				"signalId": "enc1",
 				"scale": [ { "id" : "fqd",
 							"minIn": 	0, "maxIn": 6.283185307,
-							"minOut":	0, "maxOut": 4200 }
+							"minOut":	0, "maxOut": 4000 }
 					 ],
 				"range": [ { "id" : "fqd",
 							"noLimit": 	true }
@@ -124,7 +133,7 @@
 				"signalId": "enc2",
 				"scale": [ { "id" : "fqd",
 							"minIn": 	0, "maxIn": 6.283185307,
-							"minOut":	0, "maxOut": 25600 }
+							"minOut":	0, "maxOut": 4000 }
 					 ],
 				"range": [ { "id" : "fqd",
 							"noLimit": 	true }
@@ -135,7 +144,7 @@
 				"signalId": "enc3",
 				"scale": [ { "id" : "fqd",
 							"minIn": 	0, "maxIn": 6.283185307,
-							"minOut":	0, "maxOut": 25600 }
+							"minOut":	0, "maxOut": 4000 }
 					 ],
 				"range": [ { "id" : "fqd",
 							"noLimit": 	true }
@@ -146,7 +155,7 @@
 				"signalId": "enc4",
 				"scale": [ { "id" : "fqd",
 							"minIn": 	0, "maxIn": 6.283185307,
-							"minOut":	0, "maxOut": 25600 }
+							"minOut":	0, "maxOut": 4000 }
 					 ],
 				"range": [ { "id" : "fqd",
 							"noLimit": 	true }
@@ -164,7 +173,7 @@
 					 ],
 				"range": [ { "id" : "adc_raw_channel0",
 							"minIn": 	0, "maxIn": 4095,
-							"minOut": 	0, "maxOut": 4095 }
+							"minOut": 0, "maxOut": 4095 }
 					 ],
 				"unit": ""
 			},
@@ -176,7 +185,7 @@
 					 ],
 				"range": [ { "id" : "adc_raw_channel1",
 							"minIn": 	0, "maxIn": 4095,
-							"minOut": 	0, "maxOut": 4095 }
+							"minOut": 0, "maxOut": 4095 }
 					 ],
 				"unit": ""
 			},
@@ -188,7 +197,7 @@
 					 ],
 				"range": [ { "id" : "adc_raw_channel2",
 							"minIn": 	0, "maxIn": 4095,
-							"minOut": 	0, "maxOut": 4095 }
+							"minOut": 0, "maxOut": 4095 }
 					 ],
 				"unit": ""
 			},
@@ -200,130 +209,82 @@
 					 ],
 				"range": [ { "id" : "adc_raw_channel3",
 							"minIn": 	0, "maxIn": 4095,
-							"minOut": 	0, "maxOut": 4095 }
+							"minOut": 0, "maxOut": 4095 }
 					 ],
 				"unit": ""
 			},
-			"channel5": {
-				"signalId": "dc_jack_raw",
-				"scale": [ { "id" : "dc_jack_raw_channel",
-							"minIn": 	0, "maxIn": 4095,
-							"minOut":	0, "maxOut": 4095 }
-					 ],
-				"range": [ { "id" : "dc_jack_raw_channel",
-							"minIn": 	0, "maxIn": 4095,
-							"minOut": 	0, "maxOut": 4095 }
-					 ],
-				"unit": ""
-			},
-			"channel6": {
-				"signalId": "battery_raw",
-				"scale": [ { "id" : "battery_raw_channel",
-							"minIn": 	0, "maxIn": 4095,
-							"minOut":	0, "maxOut": 4095 }
-					 ],
-				"range": [ { "id" : "battery_raw_channel",
-							"minIn": 	0, "maxIn": 4095,
-							"minOut": 	0, "maxOut": 4095 }
-					 ],
-				"unit": ""
-			},
-			"channel10": {
-				"signalId": "adc_volt_0",
-				"scale": [ { "id" : "adc_volt_channel0",
-							"minIn": 	0, "maxIn": 2,
-							"minOut":	0, "maxOut": 2 }
-					 ],
-				"range": [ { "id" : "adc_volt_channel0",
-							"minIn": 	0, "maxIn": 2,
-							"minOut": 	0, "maxOut": 2 }
-					 ],
-				"unit": "V"
-			},
-			"channel11": {
-				"signalId": "adc_volt_1",
-				"scale": [ { "id" : "adc_volt_channel1",
-							"minIn": 	0, "maxIn": 2,
-							"minOut":	0, "maxOut": 2 }
-					 ],
-				"range": [ { "id" : "adc_volt_channel1",
-							"minIn": 	0, "maxIn": 2,
-							"minOut": 	0, "maxOut": 2 }
-					 ],
-				"unit": "V"
-			},
-			"channel12": {
-				"signalId": "adc_volt_2",
-				"scale": [ { "id" : "adc_volt_channel2",
-							"minIn": 	0, "maxIn": 2,
-							"minOut":	0, "maxOut": 2 }
-					 ],
-				"range": [ { "id" : "adc_volt_channel2",
-							"minIn": 	0, "maxIn": 2,
-							"minOut": 	0, "maxOut": 2 }
-					 ],
-				"unit": "V"
-			},
-			"channel13": {
-				"signalId": "adc_volt_3",
-				"scale": [ { "id" : "adc_volt_channel3",
-							"minIn": 	0, "maxIn": 2,
-							"minOut":	0, "maxOut": 2 }
-					 ],
-				"range": [ { "id" : "adc_volt_channel3",
-							"minIn": 	0, "maxIn": 2,
-							"minOut": 	0, "maxOut": 2 }
-					 ],
-				"unit": "V"
-			},
-			"channel15": {
-				"signalId": "dc_jack_volt",
+      "channel10": {
+        "signalId": "adc_volt_0",
+        "scale": [ { "id" : "adc_volt_channel0",
+              "minIn":  0, "maxIn": 1.8,
+              "minOut": 0, "maxOut": 1.8 }
+           ],
+        "range": [ { "id" : "adc_volt_channel0",
+              "minIn":  0, "maxIn": 1.8,
+              "minOut": 0, "maxOut": 1.8 }
+           ],
+        "unit": "V"
+      },
+      "channel11": {
+        "signalId": "adc_volt_1",
+        "scale": [ { "id" : "adc_volt_channel1",
+              "minIn":  0, "maxIn": 1.8,
+              "minOut": 0, "maxOut": 1.8 }
+           ],
+        "range": [ { "id" : "adc_volt_channel1",
+              "minIn":  0, "maxIn": 1.8,
+              "minOut": 0, "maxOut": 1.8 }
+           ],
+        "unit": "V"
+      },
+      "channel12": {
+        "signalId": "adc_volt_2",
+        "scale": [ { "id" : "adc_volt_channel2",
+              "minIn":  0, "maxIn": 1.8,
+              "minOut": 0, "maxOut": 1.8 }
+           ],
+        "range": [ { "id" : "adc_volt_channel2",
+              "minIn":  0, "maxIn": 1.8,
+              "minOut": 0, "maxOut": 1.8 }
+           ],
+        "unit": "V"
+      },
+      "channel13": {
+        "signalId": "adc_volt_3",
+        "scale": [ { "id" : "adc_volt_channel3",
+              "minIn":  0, "maxIn": 1.8,
+              "minOut": 0, "maxOut": 1.8 }
+           ],
+        "range": [ { "id" : "adc_volt_channel3",
+              "minIn":  0, "maxIn": 1.8,
+              "minOut": 0, "maxOut": 1.8 }
+           ],
+        "unit": "V"
+      },
+			"channel20": {
+				"signalId": "dc_jack",
 				"scale": [ { "id" : "dc_jack_volt_channel",
-							"minIn": 	0, "maxIn": 2,
-							"minOut":	0, "maxOut": 2 }
+							"minIn": 	0, "maxIn": 10,
+							"minOut":	0, "maxOut": 10 }
 					 ],
 				"range": [ { "id" : "dc_jack_volt_channel",
-							"minIn": 	0, "maxIn": 2,
-							"minOut": 	0, "maxOut": 2 }
+							"minIn": 	0, "maxIn": 15,
+							"minOut": 0, "maxOut": 15 }
 					 ],
 				"unit": "V"
 			},
-			"channel16": {
-				"signalId": "battery_volt",
+			"channel21": {
+				"signalId": "battery",
 				"scale": [ { "id" : "battery_volt_channel",
-							"minIn": 	0, "maxIn": 2,
-							"minOut":	0, "maxOut": 2 }
+							"minIn": 	0, "maxIn": 10,
+							"minOut":	0, "maxOut": 10 }
 					 ],
 				"range": [ { "id" : "battery_volt_channel",
-							"minIn": 	0, "maxIn": 2,
-							"minOut": 	0, "maxOut": 2 }
+							"minIn": 	0, "maxIn": 10,
+							"minOut": 0, "maxOut": 10 }
 					 ],
 				"unit": "V"
-			},
-			"channel25": {
-				"signalId": "dc_jack_volt_scaled",
-				"scale": [ { "id" : "adc_dc_jack_voltage",
-							"minIn": 	0, "maxIn": 16,
-							"minOut":	0, "maxOut": 16 }
-					 ],
-				"range": [ { "id" : "adc_dc_jack_voltage",
-							"minIn": 	0, "maxIn": 16,
-							"minOut": 	0, "maxOut": 16 }
-					 ],
-				"unit": "V"
-			},
-			"channel26": {
-				"signalId": "battery_volt_scaled",
-				"scale": [ { "id" : "adc_battery_voltage",
-							"minIn": 	0, "maxIn": 9,
-							"minOut":	0, "maxOut": 9 }
-					 ],
-				"range": [ { "id" : "adc_battery_voltage",
-							"minIn": 	0, "maxIn": 9,
-							"minOut": 	0, "maxOut": 9 }
-					 ],
-				"unit": "V"
-			},
+			}
 		}
 	}
 }

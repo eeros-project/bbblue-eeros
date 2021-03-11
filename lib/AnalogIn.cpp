@@ -17,14 +17,15 @@ AnalogIn::~AnalogIn() {
   rc_adc_cleanup();
 }
 
-
+/**
+ * Channel 20 and 21 can only be read with a maximum frequency of about 100Hz. Else the call we block indefinitely.
+ */
 double AnalogIn::get() {
   double val = 0;
-
-  if (channel < 10) val = rc_adc_read_raw(channel);
-  else if (channel < 15) val = rc_adc_read_volt(channel-10);
-  else if (channel == 15) val = rc_adc_dc_jack();
-  else if (channel == 16) val = rc_adc_batt();
+  if (channel <= 3) val = rc_adc_read_raw(channel);
+  else if (channel <= 13) val = rc_adc_read_volt(channel-10);
+  else if (channel == 20) val = rc_adc_dc_jack();
+  else if (channel == 21) val = rc_adc_batt();
 
   double value = (val - offset) / scale;
   if( value > maxIn ) value = maxIn;
