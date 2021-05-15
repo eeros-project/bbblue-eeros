@@ -114,6 +114,54 @@
 							"minOut": 	-8.2, 	"maxOut": 	8.2 }
 					 ],
 				"unit": "V"
+			},
+			"channel11": {
+				"signalId": "servo1",
+				"scale": [ { "id" : "dac",
+								"minIn": 	-1.5, 	"maxIn": 	1.5,
+								"minOut": 	-1.57, 	"maxOut": 	1.57 }
+					 ],
+				"range": [ { "id" : "dac",
+								"minIn":	-1.5, 	"maxIn": 	1.5,
+								"minOut":	-1.57,	"maxOut": 	1.57 }
+					 ],
+				"unit": "rad"
+			},
+			"channel12": {
+				"signalId": "servo2",
+				"scale": [ { "id" : "dac",
+								"minIn": 	-1.5, 	"maxIn": 	1.5,
+								"minOut": 	-1.57, 	"maxOut": 	1.57 }
+					 ],
+				"range": [ { "id" : "dac",
+								"minIn":	-1.5, 	"maxIn": 	1.5,
+								"minOut":	-1.57,	"maxOut": 	1.57 }
+					 ],
+				"unit": "rad"
+			},
+			"channel13": {
+				"signalId": "servo3",
+				"scale": [ { "id" : "dac",
+								"minIn": 	-1.5, 	"maxIn": 	1.5,
+								"minOut": 	-1.57, 	"maxOut": 	1.57 }
+					 ],
+				"range": [ { "id" : "dac",
+								"minIn":	-1.5, 	"maxIn": 	1.5,
+								"minOut":	-1.57,	"maxOut": 	1.57 }
+					 ],
+				"unit": "rad"
+			},
+			"channel14": {
+				"signalId": "servo4",
+				"scale": [ { "id" : "dac",
+								"minIn": 	-1.5, 	"maxIn": 	1.5,
+								"minOut": 	-1.57, 	"maxOut": 	1.57 }
+					 ],
+				"range": [ { "id" : "dac",
+								"minIn":	-1.5, 	"maxIn": 	1.5,
+								"minOut":	-1.57,	"maxOut": 	1.57 }
+					 ],
+				"unit": "rad"
 			}
 		},
 		"subdevice3": {
