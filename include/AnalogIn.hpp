@@ -3,6 +3,11 @@
 
 #include <eeros/hal/ScalableInput.hpp>
 #include <limits>
+#include <chrono>
+
+extern "C" {
+#include <robotcontrol.h>
+};
 
 namespace bbblue {
   
@@ -16,6 +21,11 @@ class AnalogIn : public eeros::hal::ScalableInput<double> {
 
  private:
   int32_t channel;
+  static rc_mpu_config_t mpuConfig;
+  static rc_mpu_data_t mpuData;
+  rc_bmp_data_t barData;
+//   static uint32_t accState, gyroState, magState;
+  static bool first;
 };
 
 }
@@ -24,6 +34,7 @@ extern "C"{
   eeros::hal::ScalableInput<double> *createAnalogIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, 
                                                     uint32_t channel, double scale, double offset, 
                                                     double rangeMin, double rangeMax, std::string unit);
+
 }
 
 #endif /* BBBLUE_EEROS_ANALOGIN_HPP_ */
