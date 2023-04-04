@@ -5,9 +5,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 
 ## Unreleased
-(v1.4.0 targeted for 2022-07-31) ([GitHub compare v1.3.0...master](https://github.com/eeros-project/bbblue-eeros/compare/v1.3.0...master))
+(v1.4.0 targeted for 2023-08-31) ([GitHub compare v1.3.1...master](https://github.com/eeros-project/bbblue-eeros/compare/v1.3.1...master))
 
 ### Added Features
+
+
+## v1.3.1
+(2023-04-04) ([GitHub compare v1.3.0...v1.3.1](https://github.com/eeros-project/bbblue-eeros/compare/v1.3.0...v1.3.1))
+
+### Fixes
+* Fix CMAKE_MODULE_PATH issue
+* Increase recommended EEROS version
 
 
 ## v1.3.0
