@@ -5,7 +5,7 @@ project(bbblue-eeros)
 set(CMAKE_CXX_STANDARD 14)
 
 
-set(RECOMMENDED_EEROS_VERSION 1.3)
+set(RECOMMENDED_EEROS_VERSION 1.4)
 
 
 ## Load CMake modules library at specified version
