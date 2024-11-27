@@ -1,69 +1,46 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 
-project(bbblue-eeros)
+include(cmake/git.cmake)
 
-set(CMAKE_CXX_STANDARD 14)
+version_from_git(GIT_VERSION)
+message("git version: ${GIT_VERSION}")
 
+project(bbblue-eeros LANGUAGES CXX VERSION ${GIT_VERSION})
 
-set(RECOMMENDED_EEROS_VERSION 1.4)
+include(GNUInstallDirs)
+include(CMakePackageConfigHelpers)
 
+add_library("${PROJECT_NAME}_bbblue" SHARED)
+add_library("${PROJECT_NAME}::bbblue" ALIAS "${PROJECT_NAME}_bbblue")
+set_target_properties("${PROJECT_NAME}_bbblue" PROPERTIES VERSION ${GIT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR} OUTPUT_NAME bbblueeeros EXPORT_NAME bbblueeeros)
 
-## Load CMake modules library at specified version
-set(LOAD_CMAKE_MODULES_LIB TRUE CACHE BOOL "TRUE if the cmake-modules library should be loaded.")
-
-if(LOAD_CMAKE_MODULES_LIB)
-  include(cmake/CMakeModulesLibLoader.cmake)
-  load_cmake_modules_lib(https://github.com/eeros-project/cmake-modules.git)
-endif()
-
-include(CMakeModulesLib)
-
-if(CMAKE_BUILD_TYPE MATCHES "Debug|DEBUG")
-  logger_on()
-endif()
-
-if(LOAD_CMAKE_MODULES_LIB)
-  checkout_cmake_modules_lib_version(8fcde84)
-endif()
-
-
-## Fetch the version information from git tag
-include(VersioningHelpers)
-setLibraryVersion()
-
-
-# Find EEROS
-setVersionToFind("EEROS" "REQUIRED_EEROS_VERSION" ${RECOMMENDED_EEROS_VERSION} ${REQUIRED_EEROS_VERSION})
-find_package(EEROS ${VERSION_TO_FIND})
-checkIfModuleFound("EEROS" "REQUIRED_EEROS_VERSION")
-set(REQUIRED_DEGREE_OF_VERSION_COMPATIBILITY 2 CACHE STRING "The required degree of EEROS version compatibilty.")
-checkVersionCompatibility(${EEROS_VERSION} ${VERSION_TO_FIND} ${REQUIRED_DEGREE_OF_VERSION_COMPATIBILITY})
-
-
-include_directories(${ADDITIONAL_INCLUDE_DIRS})
-link_directories(${ADDITIONAL_LINK_DIRS})
-
-include_directories(${EEROS_INCLUDE_DIR})
-link_directories(${EEROS_LIB_DIR})
-
-
-find_library(BEAGLE_BOARD_BLUE_LIBRARY robotcontrol)
-if(BEAGLE_BOARD_BLUE_LIBRARY)
-  message(STATUS "-> librobotcontrol available")
-  set(BEAGLE_BOARD_BLUE_LIBRARY_DIR ${BEAGLE_BOARD_BLUE_LIBRARY_DIR} robotcontrol)
-endif()
-
+find_package(EEROS 1.4 REQUIRED)
+find_library(LIB_ROBOT_CONTROL robotcontrol REQUIRED)
 
 add_subdirectory(lib)
+target_link_libraries("${PROJECT_NAME}_bbblue" EEROS::eeros robotcontrol)
 
+target_include_directories("${PROJECT_NAME}_bbblue" PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}>)
 
-createPackageFiles(bbblue-eerosConfig.cmake.in include/ lib/)
+target_compile_features("${PROJECT_NAME}_bbblue" PRIVATE cxx_std_14)
+write_basic_package_version_file(
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+  COMPATIBILITY AnyNewerVersion
+)
 
+install(FILES
+  ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/${PROJECT_NAME}Config.cmake
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}
+)
 
-INSTALL(FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/BBBlueDevice.hpp 
-	      ${CMAKE_CURRENT_SOURCE_DIR}/include/DigOut.hpp 
-	      ${CMAKE_CURRENT_SOURCE_DIR}/include/DigIn.hpp 
-	      ${CMAKE_CURRENT_SOURCE_DIR}/include/AnalogOut.hpp 
-	      ${CMAKE_CURRENT_SOURCE_DIR}/include/AnalogIn.hpp 
-	      ${CMAKE_CURRENT_SOURCE_DIR}/include/Fqd.hpp  DESTINATION include/bbblueeeros)
+install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 
+install(TARGETS "${PROJECT_NAME}_bbblue"
+  EXPORT bbblueeeros
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+)
+
+install(EXPORT bbblueeeros NAMESPACE ${PROJECT_NAME}:: DESTINATION ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME})
