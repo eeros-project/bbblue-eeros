@@ -1,2 +1,2 @@
-include(${CMAKE_CURRENT_LIST_DIR}/bbblue-eeros.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/bbblueeeros.cmake)
 
