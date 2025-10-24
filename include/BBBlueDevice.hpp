@@ -2,6 +2,8 @@
 #define BBBLUE_EEROS_DEVICE_HPP_
 
 #include <eeros/logger/Logger.hpp>
+#include <gpiod.hpp>
+
 
 namespace bbblue {
  
@@ -14,6 +16,8 @@ class BBBlueDevice {
   
  private:
   Logger log;
+  gpiod::chip motorStandbyChip;
+  gpiod::line_request motorStandbyGPIO;
 };
 
 }

@@ -4,21 +4,18 @@
 #include <string>
 #include <eeros/hal/Input.hpp>
 
-extern "C" {
-#include <robotcontrol.h>
-};
+#include <GPIO.hpp>
 
 namespace bbblue {
-  
+
 class DigIn : public eeros::hal::Input<bool> {
  public:
   DigIn(std::string id, void* libHandle, std::string device, uint32_t subDeviceNumber, uint32_t channel, bool inverted = false);
   virtual ~DigIn();
   virtual bool get();
- 
+
  private:
-  uint32_t channel;
-  bool inverted;
+ GPIO gpio;
 };
 
 }

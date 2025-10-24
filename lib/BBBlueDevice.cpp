@@ -1,23 +1,21 @@
 #include "../include/BBBlueDevice.hpp"
 #include <eeros/core/Fault.hpp>
 
-extern "C" {
-#include <robotcontrol.h>
-};
-
 using namespace bbblue;
 
-BBBlueDevice::BBBlueDevice() : log(Logger::getLogger()) {
-  rc_model_t model = rc_model();
-  if (model != MODEL_BB_BLUE) throw eeros::Fault("wrong platform for libbbblueeeros wrapper library");
-  log.info() << "robot control initialized on BeagleBone blue"; 
-  
-  rc_disable_signal_handler();	// we use our own signal handler
-  log.info() << "robot control: signal handling transfered to application";
-}
+BBBlueDevice::BBBlueDevice() : log(Logger::getLogger()), motorStandbyChip([](){
+    return gpiod::chip("/dev/gpiochip3");
+}()), motorStandbyGPIO([&](){
+    auto lineNumber = motorStandbyChip.get_line_offset_from_name("MOT_STBY");
+    auto settings = gpiod::line_settings{}.set_direction(gpiod::line::direction::OUTPUT);
+    auto request = motorStandbyChip.prepare_request().set_consumer("BBBlue EEROS").add_line_settings(lineNumber, settings).do_request();
+    request.set_value(lineNumber, gpiod::line::value::ACTIVE);
+    return std::move(request);
+}()) {}
 
 BBBlueDevice::~BBBlueDevice() {
-  log.info() << "robot control done";
+  motorStandbyGPIO.release();
+  motorStandbyChip.close();
 }
 
 std::unique_ptr<BBBlueDevice> instance{new BBBlueDevice()};

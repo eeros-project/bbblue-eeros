@@ -1,13 +1,9 @@
 #ifndef BBBLUE_EEROS_ANALOGIN_HPP_
 #define BBBLUE_EEROS_ANALOGIN_HPP_
 
+#include "Sysfs.hpp"
 #include <eeros/hal/ScalableInput.hpp>
 #include <limits>
-#include <chrono>
-
-extern "C" {
-#include <robotcontrol.h>
-};
 
 namespace bbblue {
   
@@ -21,14 +17,7 @@ class AnalogIn : public eeros::hal::ScalableInput<double> {
 
  private:
   int32_t channel;
-  static rc_mpu_config_t mpuConfig;
-  static rc_mpu_data_t mpuData;
-  static rc_bmp_data_t bmpData;
-  static bool first;
-  bool measure = true;
-  uint32_t count = 0, maxCount = 1000;
-  std::chrono::time_point<std::chrono::high_resolution_clock> start;
-  static void dmpHandler(void);
+  SysfsFile file;
 };
 
 }

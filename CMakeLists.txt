@@ -15,12 +15,18 @@ add_library("${PROJECT_NAME}::bbblue" ALIAS "${PROJECT_NAME}_bbblue")
 set_target_properties("${PROJECT_NAME}_bbblue" PROPERTIES VERSION ${GIT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR} OUTPUT_NAME bbblueeeros EXPORT_NAME bbblueeeros)
 
 find_package(EEROS 1.4 REQUIRED)
-find_library(LIB_ROBOT_CONTROL robotcontrol REQUIRED)
+
+find_package(PkgConfig REQUIRED)
+pkg_search_module(libgpiodcxx REQUIRED IMPORTED_TARGET GLOBAL libgpiodcxx)
 
 add_subdirectory(lib)
-target_link_libraries("${PROJECT_NAME}_bbblue" EEROS::eeros robotcontrol)
+target_link_libraries("${PROJECT_NAME}_bbblue" PUBLIC EEROS::eeros PRIVATE PkgConfig::libgpiodcxx)
 
 target_include_directories("${PROJECT_NAME}_bbblue" PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include> $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME}>)
+
+add_executable(${PROJECT_NAME}_test_analog_in cmd/testAnalogIn.cpp)
+set_target_properties(${PROJECT_NAME}_test_analog_in PROPERTIES OUTPUT_NAME test_analog_ins)
+target_link_libraries(${PROJECT_NAME}_test_analog_in PRIVATE EEROS::eeros)
 
 target_compile_features("${PROJECT_NAME}_bbblue" PRIVATE cxx_std_14)
 write_basic_package_version_file(
@@ -36,7 +42,7 @@ install(FILES
 
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
 
-install(TARGETS "${PROJECT_NAME}_bbblue"
+install(TARGETS "${PROJECT_NAME}_bbblue" "${PROJECT_NAME}_test_analog_in"
   EXPORT bbblueeeros
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}

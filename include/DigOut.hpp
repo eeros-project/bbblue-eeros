@@ -1,13 +1,11 @@
 #ifndef BBBLUE_EEROS_DIGOUT_HPP_
 #define BBBLUE_EEROS_DIGOUT_HPP_
 
+#include <gpiod.hpp>
 #include <string>
 #include <eeros/hal/Output.hpp>
-
-extern "C" {
-#include <robotcontrol.h>
-};
-
+#include <GPIO.hpp>
+#include <variant>
 namespace bbblue {
 
 class DigOut : public eeros::hal::Output<bool> {
@@ -16,10 +14,10 @@ class DigOut : public eeros::hal::Output<bool> {
   virtual ~DigOut();
   virtual bool get();
   virtual void set(bool value);
- 
+
  private:
   uint32_t channel;
-  bool inverted;
+  std::variant<LED, GPIO> output;
 };
 
 }

@@ -1,6 +1,7 @@
 #ifndef BBBLUE_EEROS_FQD_HPP_
 #define BBBLUE_EEROS_FQD_HPP_
 
+#include "Sysfs.hpp"
 #include <eeros/hal/ScalableInput.hpp>
 #include <limits>
 
@@ -18,6 +19,8 @@ class Fqd : public eeros::hal::ScalableInput<double> {
   void setPos(double position);
     
  private:
+  SysfsFile countFile;
+  std::string enablePath;
   int32_t channel;
   int32_t prevPos;
   double pos;
