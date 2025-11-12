@@ -4,10 +4,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## Unreleased
-(v1.4.0 targeted for 2025-08-31) ([GitHub compare v1.3.2...master](https://github.com/eeros-project/bbblue-eeros/compare/v1.3.2...master))
+## v1.3.3
+(2025-11-12) ([GitHub compare v1.3.2...v1.3.3](https://github.com/eeros-project/bbblue-eeros/compare/v1.3.2...v1.3.3))
 
-### Added Features
+### Fixes
+* Remove librobotcontrol dependency
 
 
 ## v1.3.2
