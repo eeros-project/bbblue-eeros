@@ -17,8 +17,7 @@ struct LED {
 
 struct GPIOInfo {
     uint32_t channel;
-    std::filesystem::path path;
-    gpiod::line::offset offset;
+    const char* label;
 };
 
 struct GPIO {
@@ -26,3 +25,5 @@ struct GPIO {
     gpiod::line_request request;
     gpiod::line::offset offset;
 };
+
+GPIO requestGPIO(std::string name, gpiod::line::direction direction, bool inverted = false);

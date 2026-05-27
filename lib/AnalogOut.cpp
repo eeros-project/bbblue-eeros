@@ -1,6 +1,7 @@
 #include "../include/AnalogOut.hpp"
 
 #include <Helpers.hpp>
+#include <GPIO.hpp>
 #include <algorithm>
 #include <cstdint>
 #include <dirent.h>
@@ -24,15 +25,15 @@ struct MDir {
 struct MotorInfo {
     const char* pwmChip;
     unsigned int pwmChannel;
-    MDir dirA;
-    MDir dirB;
+    const char* dirA;
+    const char* dirB;
 };
 
 static const std::array<MotorInfo, 4> motorInfo{
-    {{"ehrpwm1", 0, {"gpiochip1", "MDIR_1A"}, {"gpiochip3", "MDIR_1B"}},
-    {"ehrpwm1", 1, {"gpiochip0", "MDIR_2A"}, {"gpiochip3", "MDIR_2B"}},
-    {"ehrpwm2", 0, {"gpiochip1", "MDIR_3A"}, {"gpiochip1", "MDIR_3B"}},
-    {"ehrpwm2", 1, {"gpiochip1", "MDIR_4A"}, {"gpiochip1", "MDIR_4B"}},}
+    {{"ehrpwm1", 0, "MDIR_1A", "MDIR_1B"},
+    {"ehrpwm1", 1, "MDIR_2A", "MDIR_2B"},
+    {"ehrpwm2", 0, "MDIR_3A", "MDIR_3B"},
+    {"ehrpwm2", 1, "MDIR_4A", "MDIR_4B"},}
 };
 
 constexpr double adjustScale(uint32_t channel, double scale) {
@@ -72,18 +73,9 @@ AnalogOut::AnalogOut(std::string id, void* libHandle, std::string device, uint32
     if(channel-1 < motorInfo.size()) {
         auto motor = motorInfo[channel-1];
         pwmChannel = motor.pwmChannel;
-        auto requestGPIO = [&](auto info) {
-            std::filesystem::path chipPath = "/dev";
-            chipPath.append(info.chip);
-            gpiod::chip chip{chipPath};
-            auto lineNumber = chip.get_line_offset_from_name(info.name);
-            auto settings = gpiod::line_settings{}.set_direction(gpiod::line::direction::OUTPUT);
-            auto request = chip.prepare_request().set_consumer("BBBlue EEROS").add_line_settings(lineNumber, settings).do_request();
-            return std::move(std::tuple(std::move(chip), std::move(request), lineNumber));
-        };
-        auto a = requestGPIO(motor.dirA);
-        auto b = requestGPIO(motor.dirB);
-        motorPins = MotorGPIO{std::move(std::get<0>(a)), std::move(std::get<0>(b)), std::move(std::get<1>(a)), std::move(std::get<1>(b)), std::get<2>(a), std::get<2>(b)};
+        auto a = requestGPIO(motor.dirA, gpiod::line::direction::OUTPUT);
+        auto b = requestGPIO(motor.dirB, gpiod::line::direction::OUTPUT);
+        motorPins = MotorGPIO{std::move(a.chip), std::move(b.chip), std::move(a.request), std::move(b.request), a.offset, b.offset};
     } else {
         motorPins = {};
         pwmChannel = channel - 10;

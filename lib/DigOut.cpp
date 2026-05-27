@@ -31,12 +31,12 @@ static std::array<LEDInfo, 11> ledInfo = {{
 }};
 
 static std::array<GPIOInfo, 6> gpioInfo = {{
-    {117, "/dev/gpiochip0", 17},
-    {125, "/dev/gpiochip0", 25},
-    {31, "/dev/gpiochip2", 1},
-    {32, "/dev/gpiochip2", 2},
-    {317, "/dev/gpiochip2", 17},
-    {320, "/dev/gpiochip2", 20}
+    {117, "GPIO1_17"},
+    {125, "GPIO1_25"},
+    {31, "GPIO3_1"},
+    {32, "GPIO3_2"},
+    {317, "GPIO3_17"},
+    {320, "GPIO3_20"}
 }};
 
 static GPIO initGPIO(uint32_t channel, bool inverted) {
@@ -45,10 +45,7 @@ static GPIO initGPIO(uint32_t channel, bool inverted) {
         std::cout << "inalid channel " << channel << '\n';
         std::exit(1);
     }
-    auto chip = gpiod::chip(gpio->path);
-    auto settings = gpiod::line_settings{}.set_direction(gpiod::line::direction::OUTPUT).set_active_low(inverted);
-    auto request = chip.prepare_request().set_consumer("BBBlue EEROS").add_line_settings(gpio->offset, settings).do_request();
-    return GPIO{std::move(chip), std::move(request), gpio->offset};
+    return requestGPIO(gpio->label, gpiod::line::direction::OUTPUT, inverted);
 }
 
 static LED initLED(uint32_t channel, bool inverted) {
